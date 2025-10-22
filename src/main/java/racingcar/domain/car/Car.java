@@ -8,4 +8,11 @@ public class Car {
         this.name = name;
         this.position = Position.initial();
     }
+
+    public void move(boolean shouldMove) {
+        if (shouldMove) {
+            position = position.moveForward();
+        }
+    }
+
 }

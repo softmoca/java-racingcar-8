@@ -3,6 +3,7 @@ package racingcar.controller;
 import java.util.List;
 import racingcar.domain.car.Car;
 import racingcar.domain.car.CarFactory;
+import racingcar.domain.game.RacingGame;
 import racingcar.domain.validator.AttemptValidator;
 import racingcar.domain.validator.CarNameValidator;
 import racingcar.view.InputView;
@@ -28,7 +29,8 @@ public class RacingController {
         int attemptCount = readAndValidateAttemptCount();
         List<Car> cars = carFactory.createCars(carNames);
 
-
+        RacingGame game = new RacingGame(cars, attemptCount);
+        playGame(game);
 
     }
 
@@ -43,5 +45,15 @@ public class RacingController {
         String input = inputView.readAttemptCount();
         return attemptValidator.validate(input);
     }
+
+    private void playGame(RacingGame game) {
+        resultView.printRoundHeader();
+
+        List<List<Car>> allRoundResults = game.startAndGetRoundResults();
+
+        // 각 라운드 결과 출력
+
+    }
+
 
 }
