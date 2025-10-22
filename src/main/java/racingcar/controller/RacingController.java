@@ -58,6 +58,7 @@ public class RacingController {
     }
     private void announceWinners(RacingGame game) {
         List<Car> winners = game.getWinners();
+        resultView.printWinners(winners);
 
     }
 
