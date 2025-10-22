@@ -51,7 +51,9 @@ public class RacingController {
 
         List<List<Car>> allRoundResults = game.startAndGetRoundResults();
 
-        // 각 라운드 결과 출력
+        for (List<Car> roundResult : allRoundResults) {
+            resultView.printRoundResult(roundResult);
+        }
 
     }
 
