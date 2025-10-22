@@ -19,4 +19,9 @@ public class Car {
         return name + " : " + position.toDisplayString();
     }
 
+    public Position getPosition() {
+        return position;
+    }
+
+
 }

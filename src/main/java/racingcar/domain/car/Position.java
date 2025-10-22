@@ -24,5 +24,9 @@ public class Position {
         return display.toString();
     }
 
+    public boolean isGreaterThan(Position other) {
+        return this.value > other.value;
+    }
+
 
 }

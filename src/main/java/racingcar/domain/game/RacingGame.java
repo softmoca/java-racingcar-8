@@ -7,10 +7,12 @@ import racingcar.domain.car.Car;
 public class RacingGame {
     private final List<Car> cars;
     private final int attemptCount;
+    private final WinnerFinder winnerFinder;
 
     public RacingGame(List<Car> cars, int attemptCount) {
         this.cars = cars;
         this.attemptCount = attemptCount;
+        this.winnerFinder = new WinnerFinder();
     }
 
     public List<List<Car>> startAndGetRoundResults() {
@@ -30,6 +32,10 @@ public class RacingGame {
             boolean shouldMove = randomValue >= 4;
             car.move(shouldMove);
         }
+    }
+
+    public List<Car> getWinners() {
+        return winnerFinder.findWinners(cars);
     }
 
 

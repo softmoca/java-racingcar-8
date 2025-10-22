@@ -31,7 +31,7 @@ public class RacingController {
 
         RacingGame game = new RacingGame(cars, attemptCount);
         playGame(game);
-
+        announceWinners(game);
     }
 
     private List<String> readAndValidateCarNames() {
@@ -54,6 +54,10 @@ public class RacingController {
         for (List<Car> roundResult : allRoundResults) {
             resultView.printRoundResult(roundResult);
         }
+
+    }
+    private void announceWinners(RacingGame game) {
+        List<Car> winners = game.getWinners();
 
     }
 
