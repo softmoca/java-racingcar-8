@@ -16,7 +16,7 @@ public class InputView {
         return parseCarNames(input);
     }
 
-    //TODO 검증 로직 추가 
+    //TODO 검증 로직 추가
     private List<String> parseCarNames(String input) {
         String[] tokens = input.split(DELIMITER);
         List<String> names = new ArrayList<>();
@@ -24,6 +24,11 @@ public class InputView {
             names.add(token.trim());
         }
         return names;
+    }
+
+    public String readAttemptCount() {
+        System.out.println(ATTEMPT_COUNT_PROMPT);
+        return Console.readLine();
     }
 
 }
