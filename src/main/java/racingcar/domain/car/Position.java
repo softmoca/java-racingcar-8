@@ -1,5 +1,7 @@
 package racingcar.domain.car;
 
+import java.util.Objects;
+
 public class Position {
     private static final String POSITION_MARK = "-";
     private final int value;
@@ -28,5 +30,17 @@ public class Position {
         return this.value > other.value;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Position position = (Position) o;
+        return value == position.value;
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(value);
+    }
 }
