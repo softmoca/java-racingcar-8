@@ -32,7 +32,7 @@ class CarNameValidatorTest {
     @DisplayName("5자 이하의 이름은 유효하다")
     void validateNamesWithMaxLength() {
         // given
-        List<String> validNames = Arrays.asList("a", "aa", "aaa", "aaaaa", "aaaaa");
+        List<String> validNames = Arrays.asList("a", "aa", "aaa", "aaaaa", "aaaa");
 
         // when & then
         assertThatCode(() -> validator.validate(validNames))
