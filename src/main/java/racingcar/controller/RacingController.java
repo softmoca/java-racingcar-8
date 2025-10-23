@@ -4,6 +4,7 @@ import java.util.List;
 import racingcar.domain.car.Car;
 import racingcar.domain.car.CarFactory;
 import racingcar.domain.game.RacingGame;
+
 import racingcar.domain.validator.AttemptValidator;
 import racingcar.domain.validator.CarNameValidator;
 import racingcar.view.InputView;
@@ -49,11 +50,12 @@ public class RacingController {
     private void playGame(RacingGame game) {
         resultView.printRoundHeader();
 
-        List<List<Car>> allRoundResults = game.startAndGetRoundResults();
-
-        for (List<Car> roundResult : allRoundResults) {
-            resultView.printRoundResult(roundResult);
-        }
+        game.start(new RacingGame.RoundResultCallback() {
+            @Override
+            public void onRoundComplete(List<Car> cars) {
+                resultView.printRoundResult(cars);
+            }
+        });
 
     }
     private void announceWinners(RacingGame game) {

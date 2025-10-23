@@ -15,15 +15,11 @@ public class RacingGame {
         this.winnerFinder = new WinnerFinder();
     }
 
-    public List<List<Car>> startAndGetRoundResults() {
-        List<List<Car>> allRoundResults = new java.util.ArrayList<>();
-
+    public void start( RoundResultCallback callback) {
         for (int round = 0; round < attemptCount; round++) {
             playRound();
-            allRoundResults.add(cars);
+            callback.onRoundComplete(cars);  // 라운드 끝날 때마다 호출
         }
-
-        return allRoundResults;
     }
 
     private void playRound() {
@@ -38,5 +34,8 @@ public class RacingGame {
         return winnerFinder.findWinners(cars);
     }
 
+    public interface RoundResultCallback {
+        void onRoundComplete(List<Car> cars);
+    }
 
 }
