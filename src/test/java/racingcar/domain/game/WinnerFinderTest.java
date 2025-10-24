@@ -39,7 +39,7 @@ class WinnerFinderTest {
 
         // then
         assertThat(winners).hasSize(1);
-        assertThat(winners.get(0).getName()).isEqualTo("pobi");
+        assertThat(winners.get(0).getName()).isEqualTo("moca");
     }
 
     @Test
