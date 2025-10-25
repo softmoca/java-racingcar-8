@@ -3,16 +3,19 @@ package racingcar.domain.game;
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.List;
 import racingcar.domain.car.Car;
+import racingcar.domain.strategy.MoveStrategy;
 
 public class RacingGame {
     private final List<Car> cars;
     private final int attemptCount;
     private final WinnerFinder winnerFinder;
+    private final MoveStrategy moveStrategy;
 
-    public RacingGame(List<Car> cars, int attemptCount) {
+    public RacingGame(List<Car> cars, int attemptCount, MoveStrategy moveStrategy) {
         this.cars = cars;
         this.attemptCount = attemptCount;
         this.winnerFinder = new WinnerFinder();
+        this.moveStrategy = moveStrategy;
     }
 
     public void start( RoundResultCallback callback) {
@@ -24,8 +27,7 @@ public class RacingGame {
 
     private void playRound() {
         for (Car car : cars) {
-            int randomValue= Randoms.pickNumberInRange(0,9);
-            boolean shouldMove = randomValue >= 4;
+            boolean shouldMove = moveStrategy.shouldMove();
             car.move(shouldMove);
         }
     }
