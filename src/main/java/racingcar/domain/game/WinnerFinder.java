@@ -13,24 +13,16 @@ public class WinnerFinder {
     }
 
     private Position findMaxPosition(List<Car> cars) {
-        Position maxPosition = cars.get(0).getPosition();
-        for (Car car : cars) {
-            Position currentPosition = car.getPosition();
-            if (currentPosition.isGreaterThan(maxPosition)) {
-                maxPosition = currentPosition;
-            }
-        }
-        return maxPosition;
+        return cars.stream()
+                .map(Car::getPosition)
+                .max((p1, p2) -> p1.isGreaterThan(p2) ? 1 : (p2.isGreaterThan(p1) ? -1 : 0))
+                .orElseThrow(() -> new IllegalStateException("자동차 목록이 비어있습니다."));
     }
 
     private List<Car> filterWinners(List<Car> cars, Position maxPosition) {
-        List<Car> winners = new ArrayList<>();
-        for (Car car : cars) {
-            if (car.getPosition().equals(maxPosition)) {
-                winners.add(car);
-            }
-        }
-        return winners;
+        return cars.stream()
+                .filter(car -> car.getPosition().equals(maxPosition))
+                .toList();
     }
 
 
