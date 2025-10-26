@@ -21,9 +21,7 @@ public class Position {
     }
 
     public String toDisplayString() {
-        return IntStream.range(0, value)
-                .mapToObj(i -> POSITION_MARK)
-                .collect(Collectors.joining());
+        return POSITION_MARK.repeat(value);
     }
 
     public boolean isGreaterThan(Position other) {
