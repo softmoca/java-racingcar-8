@@ -33,7 +33,6 @@ public class RacingController {
 
         RacingGame game = new RacingGame(cars, attemptCount, new RandomMoveStrategy());
         playGame(game);
-        playGame(game);
         announceWinners(game);
     }
 
