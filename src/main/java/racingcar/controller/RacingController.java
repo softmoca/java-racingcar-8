@@ -50,13 +50,7 @@ public class RacingController {
 
     private void playGame(RacingGame game) {
         resultView.printRoundHeader();
-
-        game.start(new RacingGame.RoundResultCallback() {
-            @Override
-            public void onRoundComplete(List<Car> cars) {
-                resultView.printRoundResult(cars);
-            }
-        });
+        game.start(resultView::printRoundResult);
 
     }
     private void announceWinners(RacingGame game) {
