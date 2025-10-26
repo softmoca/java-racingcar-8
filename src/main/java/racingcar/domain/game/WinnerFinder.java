@@ -16,7 +16,7 @@ public class WinnerFinder {
         return cars.stream()
                 .map(Car::getPosition)
                 .max((p1, p2) -> p1.isGreaterThan(p2) ? 1 : (p2.isGreaterThan(p1) ? -1 : 0))
-                .orElseThrow(() -> new IllegalStateException("자동차 목록이 비어있습니다."));
+                .get();
     }
 
     private List<Car> filterWinners(List<Car> cars, Position maxPosition) {
