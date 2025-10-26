@@ -1,6 +1,8 @@
 package racingcar.domain.car;
 
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Position {
     private static final String POSITION_MARK = "-";
@@ -19,11 +21,9 @@ public class Position {
     }
 
     public String toDisplayString() {
-        StringBuilder display = new StringBuilder();
-        for (int i = 0; i < value; i++) {
-            display.append(POSITION_MARK);
-        }
-        return display.toString();
+        return IntStream.range(0, value)
+                .mapToObj(i -> POSITION_MARK)
+                .collect(Collectors.joining());
     }
 
     public boolean isGreaterThan(Position other) {
