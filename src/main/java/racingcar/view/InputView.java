@@ -1,8 +1,7 @@
 package racingcar.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class InputView {
     private static final String CAR_NAMES_PROMPT = "경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)";
@@ -18,12 +17,9 @@ public class InputView {
 
     //TODO 검증 로직 추가
     private List<String> parseCarNames(String input) {
-        String[] tokens = input.split(DELIMITER);
-        List<String> names = new ArrayList<>();
-        for (String token : tokens) {
-            names.add(token.trim());
-        }
-        return names;
+        return Arrays.stream(input.split(DELIMITER))
+                .map(String::trim)
+                .toList();
     }
 
     public String readAttemptCount() {
