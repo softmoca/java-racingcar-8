@@ -2,6 +2,7 @@ package racingcar.view;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import racingcar.domain.car.Car;
 
 public class ResultView {
@@ -15,23 +16,15 @@ public class ResultView {
 
 
     public void printRoundResult(List<Car> cars) {
-        for (Car car : cars) {
-            System.out.println(car.getStatusDisplay());
-        }
+        cars.forEach(car -> System.out.println(car.getStatusDisplay()));
         System.out.println();
     }
 
     public void printWinners(List<Car> winners) {
-        List<String> winnerNames = extractNames(winners);
-        System.out.println(WINNER_PREFIX + String.join(NAME_DELIMITER, winnerNames));
-    }
-
-    private List<String> extractNames(List<Car> cars) {
-        List<String> names = new ArrayList<>();
-        for (Car car : cars) {
-            names.add(car.getName());
-        }
-        return names;
+        String winnerNames = winners.stream()
+                .map(Car::getName)
+                .collect(Collectors.joining(NAME_DELIMITER));
+        System.out.println(WINNER_PREFIX + winnerNames);
     }
 
 }
