@@ -1,5 +1,6 @@
 package racingcar.domain.game;
 
+import java.util.Comparator;
 import racingcar.domain.car.Car;
 import racingcar.domain.car.Position;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public class WinnerFinder {
     private Position findMaxPosition(List<Car> cars) {
         return cars.stream()
                 .map(Car::getPosition)
-                .max((p1, p2) -> p1.isGreaterThan(p2) ? 1 : (p2.isGreaterThan(p1) ? -1 : 0))
+                .max(Comparator.comparingInt(Position::getValue))
                 .get();
     }
 
