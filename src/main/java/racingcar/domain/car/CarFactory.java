@@ -6,10 +6,8 @@ import java.util.List;
 public class CarFactory {
 
     public List<Car> createCars(List<String> names) {
-        List<Car> cars = new ArrayList<>();
-        for (String name : names) {
-            cars.add(new Car(name));
-        }
-        return cars;
+        return names.stream()
+                .map(Car::new)
+                .toList();
     }
 }
