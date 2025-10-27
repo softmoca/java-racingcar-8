@@ -1,8 +1,8 @@
 package racingcar.domain.validator;
 
 public class AttemptValidator {
-    private static final String NOT_NUMBER_ERROR = "시도 횟수는 숫자여야 합니다.";
-    private static final String NOT_POSITIVE_ERROR = "시도 횟수는 1 이상이어야 합니다.";
+    static final String NOT_NUMBER_ERROR = "시도 횟수는 숫자여야 합니다.";
+    static final String NOT_POSITIVE_ERROR = "시도 횟수는 1 이상이어야 합니다.";
 
     public int validate(String input) {
         int attemptCount = parseToInt(input);
