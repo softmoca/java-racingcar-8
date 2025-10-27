@@ -1,8 +1,6 @@
 package racingcar.domain.car;
 
 import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Position {
     private static final String POSITION_MARK = "-";

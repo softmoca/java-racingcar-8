@@ -1,10 +1,9 @@
 package racingcar.domain.game;
 
 import java.util.Comparator;
+import java.util.List;
 import racingcar.domain.car.Car;
 import racingcar.domain.car.Position;
-import java.util.ArrayList;
-import java.util.List;
 
 public class WinnerFinder {
 
@@ -25,6 +24,4 @@ public class WinnerFinder {
                 .filter(car -> car.getPosition().equals(maxPosition))
                 .toList();
     }
-
-
 }

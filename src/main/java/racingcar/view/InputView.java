@@ -1,7 +1,8 @@
 package racingcar.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 import racingcar.domain.validator.InputValidator;
 
 public class InputView {
@@ -10,6 +11,7 @@ public class InputView {
     private static final String DELIMITER = ",";
 
     private final InputValidator inputValidator;
+
     public InputView() {
         this.inputValidator = new InputValidator();
     }
@@ -31,5 +33,4 @@ public class InputView {
         System.out.println(ATTEMPT_COUNT_PROMPT);
         return Console.readLine();
     }
-
 }
