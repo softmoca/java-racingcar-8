@@ -1,21 +1,25 @@
 package racingcar.domain.validator;
 
 
+import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static racingcar.domain.validator.CarNameValidator.DUPLICATE_NAME_ERROR;
+import static racingcar.domain.validator.CarNameValidator.EMPTY_NAME_ERROR;
+import static racingcar.domain.validator.CarNameValidator.LONG_NAME_ERROR;
+
+import java.util.Arrays;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.Arrays;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("CarNameValidator 클래스 테스트")
 class CarNameValidatorTest {
 
-    private CarNameValidator validator=new CarNameValidator();;
+    private CarNameValidator validator = new CarNameValidator();
+    ;
 
     @Test
     @DisplayName("유효한 자동차 이름들은 검증을 통과한다")
@@ -48,7 +52,7 @@ class CarNameValidatorTest {
         // when & then
         assertThatThrownBy(() -> validator.validate(invalidNames))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("자동차 이름은 비어있을 수 없습니다");
+                .hasMessageContaining(EMPTY_NAME_ERROR);
     }
 
     @Test
@@ -60,7 +64,7 @@ class CarNameValidatorTest {
         // when & then
         assertThatThrownBy(() -> validator.validate(invalidNames))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("자동차 이름은 비어있을 수 없습니다");
+                .hasMessageContaining(EMPTY_NAME_ERROR);
     }
 
     @ParameterizedTest
@@ -73,7 +77,7 @@ class CarNameValidatorTest {
         // when & then
         assertThatThrownBy(() -> validator.validate(invalidNames))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("자동차 이름은 5자 이하여야 합니다")
+                .hasMessageContaining(LONG_NAME_ERROR)
                 .hasMessageContaining(longName);
     }
 
@@ -86,7 +90,7 @@ class CarNameValidatorTest {
         // when & then
         assertThatThrownBy(() -> validator.validate(invalidNames))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("자동차 이름은 중복될 수 없습니다")
+                .hasMessageContaining(DUPLICATE_NAME_ERROR)
                 .hasMessageContaining("pobi");
     }
 
