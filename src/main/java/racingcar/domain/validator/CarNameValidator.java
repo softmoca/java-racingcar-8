@@ -6,9 +6,9 @@ import java.util.Set;
 
 public class CarNameValidator {
     private static final int MAXIMUM_NAME_LENGTH = 5;
-    private static final String EMPTY_NAME_ERROR = "자동차 이름은 비어있을 수 없습니다.";
-    private static final String LONG_NAME_ERROR = "자동차 이름은 5자 이하여야 합니다: ";
-    private static final String DUPLICATE_NAME_ERROR = "자동차 이름은 중복될 수 없습니다: ";
+    static final String EMPTY_NAME_ERROR = "자동차 이름은 비어있을 수 없습니다.";
+    static final String LONG_NAME_ERROR = "자동차 이름은 5자 이하여야 합니다: ";
+    static final String DUPLICATE_NAME_ERROR = "자동차 이름은 중복될 수 없습니다: ";
 
     public void validate(List<String> names) {
         validateNotEmpty(names);
