@@ -10,15 +10,15 @@ class PositionTest {
 
     @Test
     @DisplayName("초기 위치는 0이다")
-    void initialPositionIsZero() { // getter로 테스트를 해야하지 않을까?
+    void initialPositionIsZero() {
         // given
         Position position = Position.initial();
 
         // when
-        String displayString = position.toDisplayString();
+        int value = position.getValue();
 
         // then
-        assertThat(displayString).isEmpty();
+        assertThat(value).isEqualTo(0);
     }
 
     @Test
@@ -29,10 +29,9 @@ class PositionTest {
 
         // when
         Position movedPosition = position.moveForward();
-        String displayString = movedPosition.toDisplayString();
 
         // then
-        assertThat(displayString).isEqualTo("-");
+        assertThat(movedPosition.getValue()).isEqualTo(1);
     }
 
     @Test
@@ -42,12 +41,13 @@ class PositionTest {
         Position position = Position.initial();
 
         // when
-        Position position1 = position.moveForward();
-        Position position2 = position1.moveForward();
-        Position position3 = position2.moveForward();
+        Position result = position
+                .moveForward()
+                .moveForward()
+                .moveForward();
 
         // then
-        assertThat(position3.toDisplayString()).isEqualTo("---");
+        assertThat(result.getValue()).isEqualTo(3);
     }
 
     @Test
@@ -74,20 +74,29 @@ class PositionTest {
         Position moved = original.moveForward();
 
         // then
-        assertThat(original.toDisplayString()).isEmpty();
-        assertThat(moved.toDisplayString()).isEqualTo("-");
+        assertThat(original.getValue()).isEqualTo(0);
+        assertThat(moved.getValue()).isEqualTo(1);
     }
 
     @Test
-    @DisplayName("위치를 문자열로 표시한다")
-    void toDisplayString() {// 이미 위에서 문자열로 표시하는걸 테스트했지만 기능문서로서의 역할로서는 어떨지
+    @DisplayName("같은 값을 가진 Position은 동등하다")
+    void equalsSameValue() {
         // given
-        Position position = Position.initial();
+        Position position1 = Position.initial().moveForward();
+        Position position2 = Position.initial().moveForward();
 
-        // when & then
-        assertThat(position.toDisplayString()).isEqualTo("");
-        assertThat(position.moveForward().toDisplayString()).isEqualTo("-");
-        assertThat(position.moveForward().moveForward().toDisplayString()).isEqualTo("--");
-        assertThat(position.moveForward().moveForward().moveForward().toDisplayString()).isEqualTo("---");
+        // then
+        assertThat(position1).isEqualTo(position2);
+    }
+
+    @Test
+    @DisplayName("다른 값을 가진 Position은 동등하지 않다")
+    void equalsDifferentValue() {
+        // given
+        Position position1 = Position.initial().moveForward();
+        Position position2 = Position.initial().moveForward().moveForward();
+
+        // then
+        assertThat(position1).isNotEqualTo(position2);
     }
 }
