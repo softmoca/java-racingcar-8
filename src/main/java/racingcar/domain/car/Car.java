@@ -15,9 +15,6 @@ public class Car {
         }
     }
 
-    public String getStatusDisplay() {
-        return name + " : " + position.toDisplayString();
-    }
 
     public Position getPosition() {
         return position;

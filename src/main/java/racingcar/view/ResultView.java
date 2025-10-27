@@ -14,17 +14,21 @@ public class ResultView {
         System.out.println(ROUND_HEADER);
     }
 
-
-    public void printRoundResult(List<Car> cars) {
-        cars.forEach(car -> System.out.println(car.getStatusDisplay()));
-        System.out.println();
-    }
-
     public void printWinners(List<Car> winners) {
         String winnerNames = winners.stream()
                 .map(Car::getName)
                 .collect(Collectors.joining(NAME_DELIMITER));
         System.out.println(WINNER_PREFIX + winnerNames);
+    }
+    public void printRoundResult(List<Car> cars) {
+        cars.stream()
+                .map(this::formatCarStatus) // 각 Car를 문자열로 변환
+                .forEach(System.out::println); // 한 줄씩 출력
+        System.out.println();
+    }
+
+    private String formatCarStatus(Car car) {
+        return car.getName() + " : " + car.getPosition().toDisplayString();
     }
 
 }
