@@ -1,6 +1,5 @@
 package racingcar.view;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import racingcar.domain.car.Car;
@@ -21,6 +20,7 @@ public class ResultView {
                 .collect(Collectors.joining(NAME_DELIMITER));
         System.out.println(WINNER_PREFIX + winnerNames);
     }
+
     public void printRoundResult(List<Car> cars) {
         cars.stream()
                 .map(this::formatCarStatus) // 각 Car를 문자열로 변환
@@ -36,6 +36,10 @@ public class ResultView {
 
     private String formatPosition(int positionValue) {
         return POSITION_MARK.repeat(positionValue);
+    }
+
+    public void printError(String message) {
+        System.out.println(message);
     }
 
 }

@@ -4,7 +4,6 @@ import java.util.List;
 import racingcar.domain.car.Car;
 import racingcar.domain.car.CarFactory;
 import racingcar.domain.game.RacingGame;
-
 import racingcar.domain.strategy.RandomMoveStrategy;
 import racingcar.domain.validator.AttemptValidator;
 import racingcar.domain.validator.CarNameValidator;
@@ -27,20 +26,25 @@ public class RacingController {
     }
 
     public void run() {
-        List<String> carNames = readAndValidateCarNames();
-        int attemptCount = readAndValidateAttemptCount();
-        List<Car> cars = carFactory.createCars(carNames);
 
-        RacingGame game = new RacingGame(cars, attemptCount, new RandomMoveStrategy());
-        playGame(game);
-        announceWinners(game);
+        try {
+            List<String> carNames = readAndValidateCarNames();
+            int attemptCount = readAndValidateAttemptCount();
+            List<Car> cars = carFactory.createCars(carNames);
+
+            RacingGame game = new RacingGame(cars, attemptCount, new RandomMoveStrategy());
+            playGame(game);
+            announceWinners(game);
+        } catch (IllegalArgumentException e) {
+            resultView.printError(e.getMessage());
+            throw e;
+        }
     }
 
     private List<String> readAndValidateCarNames() {
         List<String> carNames = inputView.readCarNames();
         carNameValidator.validate(carNames);
         return carNames;
-
     }
 
     private int readAndValidateAttemptCount() {
@@ -51,13 +55,10 @@ public class RacingController {
     private void playGame(RacingGame game) {
         resultView.printRoundHeader();
         game.start(resultView::printRoundResult);
-
     }
+
     private void announceWinners(RacingGame game) {
         List<Car> winners = game.getWinners();
         resultView.printWinners(winners);
-
     }
-
-
 }
