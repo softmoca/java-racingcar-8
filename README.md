@@ -487,3 +487,93 @@ sequenceDiagram
     RV->>RV: joining(", ") - 쉼표로 결합
     RV->>RV: "최종 우승자 : {names}" 출력
 ```
+
+## 🏗️ 설계 원칙 및 패턴 적용
+
+### 객체지향 원칙
+
+- **SRP (단일 책임 원칙)**: 각 클래스는 하나의 책임만 가짐 (Validator 분리, WinnerFinder 분리)
+- **OCP (개방-폐쇄 원칙)**: MoveStrategy 인터페이스로 확장 가능
+- **DIP (의존성 역전 원칙)**: 콜백 패턴으로 RacingGame이 View에 의존하지 않음
+
+### 디자인 패턴
+
+- **Strategy Pattern**: MoveStrategy를 통한 이동 판단 로직 교체 가능
+- **Callback Pattern**: RoundResultCallback을 통한 실시간 결과 전달
+- **Factory Pattern**: CarFactory를 통한 객체 생성 책임 분리
+
+### 테스트 전략
+
+- **단위 테스트**: 값 객체, 검증, 계산 로직
+- **통합 테스트**: 객체 간 협력 (RacingGame + Strategy + Callback)
+
+---
+
+## 📦 패키지 구조
+
+```
+src
+├── main
+│   └── java
+│       └── racingcar
+│           ├── Application.java
+│           ├── controller
+│           │   └── RacingController.java
+│           ├── domain
+│           │   ├── car
+│           │   │   ├── Car.java
+│           │   │   ├── CarFactory.java
+│           │   │   └── Position.java
+│           │   ├── game
+│           │   │   ├── RacingGame.java
+│           │   │   └── WinnerFinder.java
+│           │   ├── strategy
+│           │   │   ├── MoveStrategy.java
+│           │   │   ├── RandomMoveStrategy.java
+│           │   │   └── FixedMoveStrategy.java
+│           │   └── validator
+│           │       ├── AttemptValidator.java
+│           │       └── CarNameValidator.java
+│           └── view
+│               ├── InputView.java
+│               └── ResultView.java
+└── test
+    └── java
+        └── racingcar
+            ├── domain
+            │   ├── car
+            │   │   ├── CarTest.java
+            │   │   ├── CarFactoryTest.java
+            │   │   └── PositionTest.java
+            │   ├── game
+            │   │   ├── RacingGameTest.java
+            │   │   └── WinnerFinderTest.java
+            │   ├── strategy
+            │   │   └── MoveStrategyTest.java
+            │   └── validator
+            │       ├── AttemptValidatorTest.java
+            │       └── CarNameValidatorTest.java
+            └── ApplicationTest.java
+```
+
+## 🧪 테스트 전략
+
+### 단위 테스트
+
+- **Car**: 이동 로직, 이름 조회, 위치 조회
+- **Position**: 전진, 비교, 문자열 변환
+- **CarFactory**: 자동차 생성
+- **WinnerFinder**: 우승자 결정 로직
+- **Validator**: 입력 검증 (정상/예외)
+- **MoveStrategy**: 고정 전략 동작
+
+### 통합 테스트
+
+- **RacingGame**:
+    - 콜백 호출 횟수 검증
+    - 전략에 따른 위치 변화 검증
+    - 라운드별 상태 추적
+    - 우승자 결정
+
+---
+
