@@ -20,9 +20,6 @@ public class Position {
         return new Position(this.value + 1);
     }
 
-    public String toDisplayString() {
-        return POSITION_MARK.repeat(value);
-    }
 
     public boolean isGreaterThan(Position other) {
         return this.value > other.value;

@@ -9,6 +9,7 @@ public class ResultView {
     private static final String ROUND_HEADER = "\n실행 결과";
     private static final String WINNER_PREFIX = "최종 우승자 : ";
     private static final String NAME_DELIMITER = ", ";
+    private static final String POSITION_MARK = "-";
 
     public void printRoundHeader() {
         System.out.println(ROUND_HEADER);
@@ -27,8 +28,14 @@ public class ResultView {
         System.out.println();
     }
 
+
     private String formatCarStatus(Car car) {
-        return car.getName() + " : " + car.getPosition().toDisplayString();
+        String positionDisplay = formatPosition(car.getPosition().getValue());
+        return car.getName() + " : " + positionDisplay;
+    }
+
+    private String formatPosition(int positionValue) {
+        return POSITION_MARK.repeat(positionValue);
     }
 
 }
