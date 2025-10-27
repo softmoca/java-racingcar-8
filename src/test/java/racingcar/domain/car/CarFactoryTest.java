@@ -12,12 +12,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("CarFactory 통합 테스트")
 class CarFactoryTest {
 
-    private CarFactory carFactory;
+    private CarFactory carFactory = new CarFactory();
 
-    @BeforeEach
-    void setUp() {
-        carFactory = new CarFactory();
-    }
 
     @Test
     @DisplayName("자동차 이름 목록으로 자동차들을 생성한다")
@@ -46,9 +42,8 @@ class CarFactoryTest {
 
         // then
         assertThat(cars)
-                .allMatch(car -> car.getPosition().toDisplayString().isEmpty());
+                .allMatch(car -> car.getPosition().getValue() == 0);
     }
-
 
     @Test
     @DisplayName("생성된 자동차들은 독립적으로 동작한다")
@@ -63,8 +58,7 @@ class CarFactoryTest {
         cars.get(1).move(true);
 
         // then
-        assertThat(cars.get(0).getPosition().toDisplayString()).isEqualTo("--");
-        assertThat(cars.get(1).getPosition().toDisplayString()).isEqualTo("-");
+        assertThat(cars.get(0).getPosition().getValue()).isEqualTo(2);
+        assertThat(cars.get(1).getPosition().getValue()).isEqualTo(1);
     }
-
 }
