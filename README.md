@@ -274,3 +274,216 @@ jun : --
 | **RoundResultCallback** | 라운드 종료 알림 인터페이스 *(콜백)*                  | `void onRoundComplete(List<Car> cars)`                                                                          |
 
 ---
+
+## 📊 시퀀스 다이어그램
+
+## 전체 흐름 시퀀스
+
+```mermaid
+sequenceDiagram
+    actor User as 사용자
+    participant RC as RacingController
+    participant IV as InputView
+    participant Validator as Validators
+    participant CF as CarFactory
+    participant RG as RacingGame
+    participant MS as MoveStrategy
+    participant RV as ResultView
+
+    User->>RC: 게임 시작
+    
+    rect rgb(200, 220, 240)
+        Note over RC,CF: 1. 초기화 단계
+        RC->>IV: 이름 입력 요청
+        IV-->>RC: 이름 목록
+        RC->>Validator: 이름 검증
+        RC->>CF: 자동차 생성
+        CF-->>RC: 자동차 목록
+        
+        RC->>IV: 시도 횟수 입력 요청
+        IV-->>RC: 시도 횟수
+        RC->>Validator: 횟수 검증
+        
+        RC->>MS: 전략 생성
+        RC->>RG: 게임 생성
+    end
+    
+    rect rgb(220, 240, 200)
+        Note over RC,RV: 2. 경주 진행 단계
+        RC->>RV: 헤더 출력
+        RC->>RG: start(callback)
+        
+        loop 라운드마다
+            RG->>MS: 이동 판단
+            RG->>RG: 자동차 이동
+            RG->>RC: 콜백 호출
+            RC->>RV: 라운드 결과 출력
+        end
+    end
+    
+    rect rgb(240, 220, 200)
+        Note over RC,RV: 3. 우승자 결정 단계
+        RC->>RG: 우승자 조회
+        RG-->>RC: 우승자 목록
+        RC->>RV: 우승자 출력
+    end
+    
+    RV-->>User: 최종 결과 표시
+```
+
+### 게임 시작 및 초기화 시퀀스
+
+```mermaid
+sequenceDiagram
+    actor User as 사용자
+    participant IV as InputView
+    participant RC as RacingController
+    participant CNV as CarNameValidator
+    participant CF as CarFactory
+    participant Car as Car
+    participant Pos as Position
+    participant AV as AttemptValidator
+    participant RG as RacingGame
+    participant MS as MoveStrategy
+
+    User->>IV: 자동차 이름 입력<br/>(쉼표로 구분)
+    RC->>IV: readCarNames()
+    IV-->>RC: List<String>
+    
+    RC->>CNV: validate(names)
+    CNV->>CNV: 비어있지 않은지 검증
+    CNV->>CNV: 5자 이하인지 검증
+    CNV->>CNV: 중복 없는지 검증
+    CNV-->>RC: 검증 완료
+    
+    RC->>CF: createCars(names)
+    loop 각 이름마다
+        CF->>Car: new Car(name)
+        Car->>Pos: Position.initial()
+        Pos-->>Car: Position(0)
+        Car-->>CF: Car 객체
+    end
+    CF-->>RC: List<Car>
+    
+    User->>IV: 시도 횟수 입력
+    RC->>IV: readAttemptCount()
+    IV-->>RC: String
+    
+    RC->>AV: validate(input)
+    AV->>AV: 숫자 형식 검증
+    AV->>AV: 양의 정수 검증
+    AV-->>RC: int
+    
+    RC->>MS: new RandomMoveStrategy()
+    MS-->>RC: strategy
+    
+    RC->>RG: new RacingGame(cars, attemptCount, strategy)
+    RG-->>RC: game
+```
+
+### 경주 진행 시퀀스
+
+```mermaid
+sequenceDiagram
+    participant RC as RacingController
+    participant RV as ResultView
+    participant RG as RacingGame
+    participant MS as MoveStrategy
+    participant Car as Car
+    participant Pos as Position
+    participant CB as RoundResultCallback
+
+    RC->>RV: printRoundHeader()
+    RV->>RV: "실행 결과" 출력
+    
+    RC->>RG: start(callback)
+    
+    loop attemptCount만큼 반복
+        RG->>RG: playRound()
+        
+        loop 각 자동차마다
+            RG->>MS: shouldMove()
+            MS->>MS: 랜덤 값 생성 (0~9)
+            MS->>MS: 4 이상인지 판단
+            MS-->>RG: boolean
+            
+            RG->>Car: move(shouldMove)
+            
+            alt shouldMove == true
+                Car->>Pos: moveForward()
+                Pos->>Pos: new Position(value + 1)
+                Pos-->>Car: newPosition
+                Car->>Car: position 업데이트
+            else shouldMove == false
+                Car->>Car: 이동 안함
+            end
+        end
+        
+        RG->>CB: onRoundComplete(cars)
+        CB->>RC: 콜백 실행
+        RC->>RV: printRoundResult(cars)
+        
+        loop 각 자동차마다
+            RV->>Car: getName()
+            Car-->>RV: name
+            RV->>Car: getPosition()
+            Car-->>RV: position
+            RV->>Pos: toDisplayString()
+            Pos->>Pos: "-".repeat(value)
+            Pos-->>RV: String
+            RV->>RV: "{name} : {display}" 출력
+        end
+        
+        RV->>RV: 빈 줄 출력
+    end
+```
+
+### 우승자 결정 시퀀스
+
+```mermaid
+sequenceDiagram
+    participant RC as RacingController
+    participant RG as RacingGame
+    participant WF as WinnerFinder
+    participant Car as Car
+    participant Pos as Position
+    participant RV as ResultView
+
+    RC->>RG: getWinners()
+    RG->>WF: findWinners(cars)
+    
+    WF->>WF: Stream 시작
+    
+    loop 각 자동차 순회
+        WF->>Car: getPosition()
+        Car-->>WF: position
+        WF->>Pos: getValue()
+        Pos-->>WF: int value
+    end
+    
+    WF->>WF: max() - 최대 위치값 계산
+    WF->>WF: maxPosition 저장
+    
+    WF->>WF: filter() - 최대 위치 자동차만 필터링
+    
+    loop 각 자동차 검사
+        WF->>Car: getPosition()
+        Car-->>WF: position
+        WF->>Pos: isGreaterThan(maxPosition)
+        Pos-->>WF: boolean
+    end
+    
+    WF->>WF: collect() - List로 수집
+    WF-->>RG: List<Car> winners
+    RG-->>RC: List<Car> winners
+    
+    RC->>RV: printWinners(winners)
+    
+    loop 각 우승자마다
+        RV->>Car: getName()
+        Car-->>RV: name
+    end
+    
+    RV->>RV: joining(", ") - 쉼표로 결합
+    RV->>RV: "최종 우승자 : {names}" 출력
+```
