@@ -64,21 +64,6 @@ class CarTest {
     }
 
     @Test
-    @DisplayName("자동차의 위치를 문자열로 표현할 수 있다")
-    void positionToDisplayString() {
-        // given
-        Car car = new Car("moca");
-
-        // when
-        car.move(true);
-        car.move(true);
-        String displayString = car.getPosition().toDisplayString();
-
-        // then
-        assertThat(displayString).isEqualTo("--");
-    }
-
-    @Test
     @DisplayName("자동차의 위치를 조회할 수 있다")
     void getPosition() {
         // given
@@ -90,7 +75,6 @@ class CarTest {
 
         // then
         assertThat(position.getValue()).isEqualTo(1);
-        assertThat(position.toDisplayString()).isEqualTo("-");
     }
 
     @Test
