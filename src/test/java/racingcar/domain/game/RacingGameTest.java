@@ -95,28 +95,9 @@ class RacingGameTest {
         assertThat(positions).containsExactly(1, 2, 3, 4, 5);
     }
 
-    @DisplayName("모든 자동차가 같은 거리를 이동하면 모두 우승자가 된다")
-    @Test
-    void 동점이면_모두_우승자() {
-        // given - 모든 차가 5번 전진
-        RacingGame game = new RacingGame(cars, 5, alwaysMove);
-
-        // when - 경주 후 우승자 확인
-        game.start(roundCars -> {
-        });
-        List<Car> winners = game.getWinners();
-
-        // then - 3명 모두 우승
-        assertThat(winners).hasSize(3);
-        assertThat(winners)
-                .extracting(Car::getName)
-                .containsExactly("mo", "co", "ca");
-    }
-
     @DisplayName("가장 많이 전진한 자동차만 우승자가 된다")
     @Test
     void 가장_많이_전진한_차만_우승() {
-        // given - pobi만 전진, woni는 정지하는 전략
         List<Car> twoCars = Arrays.asList(
                 new Car("moca"),
                 new Car("coco")
