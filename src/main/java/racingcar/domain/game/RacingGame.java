@@ -1,6 +1,5 @@
 package racingcar.domain.game;
 
-import camp.nextstep.edu.missionutils.Randoms;
 import java.util.List;
 import racingcar.domain.car.Car;
 import racingcar.domain.strategy.MoveStrategy;
@@ -18,17 +17,16 @@ public class RacingGame {
         this.moveStrategy = moveStrategy;
     }
 
-    public void start( RoundResultCallback callback) {
+    public void start(RoundResultCallback callback) {
         for (int round = 0; round < attemptCount; round++) {
             playRound();
-            callback.onRoundComplete(cars);  // 라운드 끝날 때마다 호출
+            callback.onRoundComplete(cars);
         }
     }
 
     private void playRound() {
         for (Car car : cars) {
-            boolean shouldMove = moveStrategy.shouldMove();
-            car.move(shouldMove);
+            car.move(moveStrategy.shouldMove());
         }
     }
 

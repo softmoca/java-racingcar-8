@@ -23,8 +23,8 @@ public class ResultView {
 
     public void printRoundResult(List<Car> cars) {
         cars.stream()
-                .map(this::formatCarStatus) // 각 Car를 문자열로 변환
-                .forEach(System.out::println); // 한 줄씩 출력
+                .map(this::formatCarStatus)
+                .forEach(System.out::println);
         System.out.println();
     }
 
