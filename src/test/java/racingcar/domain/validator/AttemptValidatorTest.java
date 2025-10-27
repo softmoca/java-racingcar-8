@@ -1,13 +1,15 @@
 package racingcar.domain.validator;
 
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static racingcar.domain.validator.AttemptValidator.NOT_NUMBER_ERROR;
+import static racingcar.domain.validator.AttemptValidator.NOT_POSITIVE_ERROR;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("AttemptValidator 클래스 테스트")
 class AttemptValidatorTest {
@@ -34,7 +36,7 @@ class AttemptValidatorTest {
         // when & then
         assertThatThrownBy(() -> validator.validate(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("시도 횟수는 1 이상이어야 합니다");
+                .hasMessageContaining(NOT_POSITIVE_ERROR);
     }
 
     @ParameterizedTest
@@ -44,7 +46,7 @@ class AttemptValidatorTest {
         // when & then
         assertThatThrownBy(() -> validator.validate(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("시도 횟수는 1 이상이어야 합니다");
+                .hasMessageContaining(NOT_POSITIVE_ERROR);
     }
 
     @ParameterizedTest
@@ -54,7 +56,7 @@ class AttemptValidatorTest {
         // when & then
         assertThatThrownBy(() -> validator.validate(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("시도 횟수는 숫자여야 합니다");
+                .hasMessageContaining(NOT_NUMBER_ERROR);
     }
 
     @Test
@@ -66,7 +68,7 @@ class AttemptValidatorTest {
         // when & then
         assertThatThrownBy(() -> validator.validate(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("시도 횟수는 숫자여야 합니다");
+                .hasMessageContaining(NOT_NUMBER_ERROR);
     }
 
     @Test
@@ -78,7 +80,7 @@ class AttemptValidatorTest {
         // when & then
         assertThatThrownBy(() -> validator.validate(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("시도 횟수는 숫자여야 합니다");
+                .hasMessageContaining(NOT_NUMBER_ERROR);
     }
 
     @Test
@@ -90,7 +92,7 @@ class AttemptValidatorTest {
         // when & then
         assertThatThrownBy(() -> validator.validate(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("시도 횟수는 숫자여야 합니다");
+                .hasMessageContaining(NOT_NUMBER_ERROR);
     }
 
 }
