@@ -15,13 +15,11 @@ class CarTest {
         Car car = new Car("moca");
 
         // when
-        String statusDisplay = car.getStatusDisplay();
+        Position position = car.getPosition();
 
         // then
-        assertThat(statusDisplay).isEqualTo("moca : ");
+        assertThat(position.getValue()).isEqualTo(0);
     }
-
-
 
     @Test
     @DisplayName("이동 조건이 true이면 전진한다")
@@ -33,7 +31,7 @@ class CarTest {
         car.move(true);
 
         // then
-        assertThat(car.getStatusDisplay()).isEqualTo("moca : -");
+        assertThat(car.getPosition().getValue()).isEqualTo(1);
     }
 
     @Test
@@ -46,7 +44,7 @@ class CarTest {
         car.move(false);
 
         // then
-        assertThat(car.getStatusDisplay()).isEqualTo("moca : ");
+        assertThat(car.getPosition().getValue()).isEqualTo(0);
     }
 
     @Test
@@ -62,22 +60,22 @@ class CarTest {
         car.move(true);
 
         // then
-        assertThat(car.getStatusDisplay()).isEqualTo("moca : ---");
+        assertThat(car.getPosition().getValue()).isEqualTo(3);
     }
 
     @Test
-    @DisplayName("자동차 상태를 표시 문자열로 반환한다")
-    void getStatusDisplay() {
+    @DisplayName("자동차의 위치를 문자열로 표현할 수 있다")
+    void positionToDisplayString() {
         // given
         Car car = new Car("moca");
 
         // when
         car.move(true);
         car.move(true);
-        String statusDisplay = car.getStatusDisplay();
+        String displayString = car.getPosition().toDisplayString();
 
         // then
-        assertThat(statusDisplay).isEqualTo("moca : --");
+        assertThat(displayString).isEqualTo("--");
     }
 
     @Test
@@ -91,6 +89,7 @@ class CarTest {
         Position position = car.getPosition();
 
         // then
+        assertThat(position.getValue()).isEqualTo(1);
         assertThat(position.toDisplayString()).isEqualTo("-");
     }
 
@@ -106,5 +105,4 @@ class CarTest {
         // then
         assertThat(name).isEqualTo("moca");
     }
-
 }
