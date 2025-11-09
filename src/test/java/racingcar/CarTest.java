@@ -25,5 +25,19 @@ class CarTest {
 
     }
 
+    @Test
+    void 이름이_5자면_자동차가_생성된다() {
+        Car car = new Car("abcde");
+
+        assertThat(car.getName()).isEqualTo("abcde");
+    }
+
+    @Test
+    void 이름이_1자면_자동차가_생성된다() {
+        Car car = new Car("a");
+
+        assertThat(car.getName()).isEqualTo("a");
+    }
+
 
 }
