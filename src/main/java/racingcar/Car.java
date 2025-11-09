@@ -2,14 +2,20 @@ package racingcar;
 
 
 public class Car {
-
+    private static final int MAX_NAME_LENGTH = 5;
     private String name;
 
     public Car(String name) {
-        if (name.length() > 5) {
-            throw new IllegalArgumentException("자동차 이름은 5자 이하여야 합니다.");
-        }
+        validateName(name);
         this.name = name;
+    }
+
+    private void validateName(String name) {
+        if (name.length() > MAX_NAME_LENGTH) {
+            throw new IllegalArgumentException(
+                    "자동차 이름은 " + MAX_NAME_LENGTH + "자 이하여야 합니다."
+            );
+        }
     }
 
     public String getName() {
