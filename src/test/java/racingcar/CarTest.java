@@ -40,4 +40,12 @@ class CarTest {
     }
 
 
+    @Test
+    void 생성된_자동차의_초기_위치는_0이다() {
+        Car car = new Car("pobi");
+
+        assertThat(car.getPosition()).isEqualTo(0);
+    }
+
+
 }
