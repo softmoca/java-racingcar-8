@@ -71,5 +71,18 @@ class CarTest {
         assertThat(car.getPosition()).isEqualTo(0);
     }
 
+    @Test
+    void 여러_번_전진할_수_있다() {
+        // given
+        Car car = new Car("pobi");
+
+        // when
+        car.move(true);
+        car.move(true);
+        car.move(true);
+
+        // then
+        assertThat(car.getPosition()).isEqualTo(3);
+    }
 
 }
