@@ -20,6 +20,12 @@ public class Car {
         }
     }
 
+    public void move(boolean shouldMove) {
+        if (shouldMove) {
+            position++;
+        }
+    }
+
     public String getName() {
         return name;
     }
