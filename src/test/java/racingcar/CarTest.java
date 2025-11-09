@@ -85,4 +85,18 @@ class CarTest {
         assertThat(car.getPosition()).isEqualTo(3);
     }
 
+    @Test
+    void 이동전략인터페이스로_자동차를_움직일_수_있다() {
+        // given
+        Car car = new Car("pobi");
+        MovingStrategy alwaysMove = () -> true;
+
+        // when: 전략을 사용해서 이동
+        car.move(alwaysMove.shouldMove());
+
+        // then
+        assertThat(car.getPosition()).isEqualTo(1);
+    }
+
+
 }
