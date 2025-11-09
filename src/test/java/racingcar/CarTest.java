@@ -47,17 +47,28 @@ class CarTest {
         assertThat(car.getPosition()).isEqualTo(0);
     }
 
-
     @Test
-    void 자동차가_전진하면_위치가_1_증가한다() {
+    void 전진_조건이_true면_위치가_1_증가한다() {
         // given
         Car car = new Car("pobi");
 
         // when
-        car.move();
+        car.move(true);
 
         // then
         assertThat(car.getPosition()).isEqualTo(1);
+    }
+
+    @Test
+    void 전진_조건이_false면_위치가_변하지_않는다() {
+        // given
+        Car car = new Car("pobi");
+
+        // when
+        car.move(false);
+
+        // then
+        assertThat(car.getPosition()).isEqualTo(0);
     }
 
 
