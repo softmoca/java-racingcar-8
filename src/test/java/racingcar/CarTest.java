@@ -48,4 +48,17 @@ class CarTest {
     }
 
 
+    @Test
+    void 자동차가_전진하면_위치가_1_증가한다() {
+        // given
+        Car car = new Car("pobi");
+
+        // when
+        car.move();
+
+        // then
+        assertThat(car.getPosition()).isEqualTo(1);
+    }
+
+
 }
