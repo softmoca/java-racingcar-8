@@ -1,5 +1,7 @@
 package racingcar;
 
+import java.util.Objects;
+
 public class Name {
 
     private static final int MAX_LENGTH = 5;
@@ -27,4 +29,17 @@ public class Name {
         return value;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Name name = (Name) o;
+        return Objects.equals(value, name.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(value);
+    }
 }
