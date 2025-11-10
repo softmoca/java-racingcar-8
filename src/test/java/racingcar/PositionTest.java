@@ -37,5 +37,13 @@ class PositionTest {
         assertThat(position.getValue()).isEqualTo(0);
     }
 
+    @Test
+    void 같은_위치면_동등하다() {
+        Position position1 = Position.from(3);
+        Position position2 = Position.from(3);
+
+        assertThat(position1).isEqualTo(position2);
+    }
+
 
 }
