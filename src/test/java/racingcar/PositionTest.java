@@ -27,5 +27,15 @@ class PositionTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @Test
+    void 위치를_1_증가시킬_수_있다() {
+
+        Position position = Position.start();
+        Position moved = position.increase();
+
+        assertThat(moved.getValue()).isEqualTo(1);
+        assertThat(position.getValue()).isEqualTo(0);
+    }
+
 
 }
