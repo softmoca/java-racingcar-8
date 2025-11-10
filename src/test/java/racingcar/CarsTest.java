@@ -49,5 +49,27 @@ class CarsTest {
         assertThat(positions).containsExactly(1, 1, 1);
     }
 
+    @Test
+    void 각_자동차는_전진_조건에_따라_다르게_이동한다() {
+        // given
+        Cars cars = Cars.from(Arrays.asList("pobi", "woni", "jun"));
+
+        // given
+        MovingStrategy alternateStrategy = new MovingStrategy() {
+            private int count = 0;
+
+            @Override
+            public boolean shouldMove() {
+                return count++ % 2 == 0;
+            }
+        };
+
+        // when
+        cars.moveAll(alternateStrategy);
+
+        // then
+        assertThat(cars.getPositions()).containsExactly(1, 0, 1);
+    }
+
 
 }
