@@ -30,5 +30,17 @@ public class Cars {
                 .collect(Collectors.toList());
     }
 
+    public void moveAll(MovingStrategy strategy) {
+        cars.forEach(car -> {
+            boolean shouldMove = strategy.shouldMove();
+            car.move(shouldMove);
+        });
+    }
+
+    public List<Integer> getPositions() {
+        return cars.stream()
+                .map(Car::getPosition)
+                .collect(Collectors.toList());
+    }
 
 }
