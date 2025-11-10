@@ -3,35 +3,27 @@ package racingcar;
 
 public class Car {
     private static final int MAX_NAME_LENGTH = 5;
-    private String name;
-    private int position;
+    private final Name name;
+    private Position position;
 
     public Car(String name) {
-        validateName(name);
-        this.name = name;
-        this.position = 0;
-    }
-
-    private void validateName(String name) {
-        if (name.length() > MAX_NAME_LENGTH) {
-            throw new IllegalArgumentException(
-                    "자동차 이름은 " + MAX_NAME_LENGTH + "자 이하여야 합니다."
-            );
-        }
+        this.name = Name.from(name);
+        this.position = Position.start();
     }
 
     public void move(boolean shouldMove) {
         if (shouldMove) {
-            position++;
+            position = position.increase();
         }
     }
 
     public String getName() {
-        return name;
+        return name.getValue();
     }
 
     public int getPosition() {
-        return position;
+        return position.getValue();
     }
+
 
 }
