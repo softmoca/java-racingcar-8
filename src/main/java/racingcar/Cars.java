@@ -1,0 +1,25 @@
+package racingcar;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Cars {
+
+    private final List<Car> cars;
+
+    private Cars(List<Car> cars) {
+        this.cars = cars;
+    }
+
+    public static Cars from(List<String> names) {
+        List<Car> cars = names.stream()
+                .map(Car::new)
+                .collect(Collectors.toList());
+
+        return new Cars(cars);
+    }
+
+    public int size() {
+        return cars.size();
+    }
+}
