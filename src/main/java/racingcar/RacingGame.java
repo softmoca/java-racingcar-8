@@ -1,5 +1,6 @@
 package racingcar;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RacingGame {
@@ -11,12 +12,16 @@ public class RacingGame {
     }
 
     public RacingResult run(MovingStrategy strategy, int rounds) {
+        List<List<Integer>> roundHistory = new ArrayList<>();
         for (int i = 0; i < rounds; i++) {
             cars.moveAll(strategy);
+
+            List<Integer> currentPositions = cars.getPositions();
+            roundHistory.add(currentPositions);
         }
 
         List<String> winners = cars.getWinners();
 
-        return RacingResult.of(winners);
+        return RacingResult.of(winners, roundHistory);
     }
 }
