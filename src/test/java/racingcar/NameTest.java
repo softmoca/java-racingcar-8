@@ -35,4 +35,12 @@ class NameTest {
         assertThat(name.getValue()).isEqualTo("a");
     }
 
+    @Test
+    void 같은_이름이면_동등하다() {
+        Name name1 = Name.from("pobi");
+        Name name2 = Name.from("pobi");
+
+        assertThat(name1).isEqualTo(name2);
+    }
+
 }
