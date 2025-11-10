@@ -1,4 +1,4 @@
-package racingcar;
+package racingcar.view;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ public class OutputView {
     private static final String WINNER_PREFIX = "최종 우승자 : ";
     private static final String POSITION_SEPARATOR = " : ";
     private static final String WINNER_DELIMITER = ", ";
+    private static final String ERROR_PREFIX = "[ERROR] ";
 
     public static void printHeader() {
         System.out.println(RESULT_HEADER);
@@ -27,5 +28,9 @@ public class OutputView {
     public static void printWinners(List<String> winners) {
         String winnersText = String.join(WINNER_DELIMITER, winners);
         System.out.println(WINNER_PREFIX + winnersText);
+    }
+
+    public static void printError(String message) {
+        System.out.println(ERROR_PREFIX + message);
     }
 }

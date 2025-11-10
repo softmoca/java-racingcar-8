@@ -1,8 +1,9 @@
-package racingcar;
+package racingcar.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
+import racingcar.view.PositionFormatter;
 
 class PositionFormatterTest {
 
@@ -12,5 +13,5 @@ class PositionFormatterTest {
         assertThat(result).isEmpty();
     }
 
- 
+
 }
