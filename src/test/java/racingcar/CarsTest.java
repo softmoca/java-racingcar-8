@@ -92,5 +92,25 @@ class CarsTest {
         assertThat(winners).containsExactly("pobi");
     }
 
+    @Test
+    void 공동_우승자가_있을_수_있다() {
+        // given
+        Cars cars = Cars.from(Arrays.asList("pobi", "woni", "jun"));
+
+        // when
+        cars.moveAll(new MovingStrategy() {
+            private int count = 0;
+
+            @Override
+            public boolean shouldMove() {
+                return count++ % 2 == 0;  // 0, 2번째만 true
+            }
+        });
+
+        // then
+        List<String> winners = cars.getWinners();
+        assertThat(winners).containsExactly("pobi", "jun");
+    }
+
 
 }
