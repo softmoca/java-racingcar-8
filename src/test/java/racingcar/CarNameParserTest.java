@@ -47,4 +47,13 @@ class CarNameParserTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @Test
+    void 빈_이름이_있으면_예외가_발생한다() {
+        String input = "pobi,,jun";
+
+        assertThatThrownBy(() -> CarNameParser.parse(input))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+
 }
