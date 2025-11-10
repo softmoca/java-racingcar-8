@@ -71,5 +71,26 @@ class CarsTest {
         assertThat(cars.getPositions()).containsExactly(1, 0, 1);
     }
 
+    @Test
+    void 가장_멀리_간_자동차가_우승자다() {
+        // given: 3대의 자동차
+        Cars cars = Cars.from(Arrays.asList("pobi", "woni", "jun"));
+
+        // when: pobi만 2번, 나머지는 1번 전진
+        cars.moveAll(() -> true);
+        cars.moveAll(new MovingStrategy() {
+            private int count = 0;
+
+            @Override
+            public boolean shouldMove() {
+                return count++ == 0;
+            }
+        });
+
+        // then
+        List<String> winners = cars.getWinners();
+        assertThat(winners).containsExactly("pobi");
+    }
+
 
 }
