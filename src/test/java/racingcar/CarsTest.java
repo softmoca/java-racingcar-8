@@ -19,4 +19,18 @@ class CarsTest {
         // then
         assertThat(cars.size()).isEqualTo(3);
     }
+
+    @Test
+    void 생성된_자동차들의_이름을_확인할_수_있다() {
+        // given
+        List<String> names = Arrays.asList("pobi", "woni", "jun");
+
+        // when
+        Cars cars = Cars.from(names);
+
+        // then
+        List<String> carNames = cars.getNames();
+        assertThat(carNames).containsExactly("pobi", "woni", "jun");
+    }
+
 }
