@@ -33,4 +33,21 @@ class CarsTest {
         assertThat(carNames).containsExactly("pobi", "woni", "jun");
     }
 
+    @Test
+    void 모든_자동차가_동시에_이동한다() {
+        // given: 3대의 자동차
+        Cars cars = Cars.from(Arrays.asList("pobi", "woni", "jun"));
+
+        // given: 항상 전진하는 전략
+        MovingStrategy alwaysMove = () -> true;
+
+        // when: 모두 이동
+        cars.moveAll(alwaysMove);
+
+        // then
+        List<Integer> positions = cars.getPositions();
+        assertThat(positions).containsExactly(1, 1, 1);
+    }
+
+
 }
