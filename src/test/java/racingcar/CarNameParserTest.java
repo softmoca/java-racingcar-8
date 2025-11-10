@@ -19,5 +19,23 @@ class CarNameParserTest {
         assertThat(names).containsExactly("pobi", "woni", "jun");
     }
 
+    @Test
+    void 이름_사이의_공백을_제거한다() {
+        String input = "pobi, woni, jun";
+
+        List<String> names = CarNameParser.parse(input);
+
+        assertThat(names).containsExactly("pobi", "woni", "jun");
+    }
+
+    @Test
+    void 이름_앞뒤의_공백을_제거한다() {
+        String input = " pobi , woni , jun ";
+
+        List<String> names = CarNameParser.parse(input);
+
+        assertThat(names).containsExactly("pobi", "woni", "jun");
+    }
+
 
 }
