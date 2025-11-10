@@ -24,6 +24,10 @@ public class Position {
         }
     }
 
+    public Position increase() {
+        return new Position(this.value + 1);
+    }
+
 
     public int getValue() {
         return value;
