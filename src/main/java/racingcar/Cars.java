@@ -22,4 +22,12 @@ public class Cars {
     public int size() {
         return cars.size();
     }
+
+
+    public List<String> getNames() {
+        return cars.stream()
+                .map(Car::getName)
+                .collect(Collectors.toList());
+    }
+
 }
