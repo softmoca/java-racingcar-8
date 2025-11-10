@@ -1,6 +1,7 @@
 package racingcar;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -37,5 +38,13 @@ class CarNameParserTest {
         assertThat(names).containsExactly("pobi", "woni", "jun");
     }
 
+
+    @Test
+    void 빈_문자열은_예외가_발생한다() {
+        String input = "";
+
+        assertThatThrownBy(() -> CarNameParser.parse(input))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 
 }

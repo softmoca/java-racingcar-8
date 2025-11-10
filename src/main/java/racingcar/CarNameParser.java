@@ -11,9 +11,11 @@ public class CarNameParser {
     public static List<String> parse(String input) {
 
         List<String> names = Arrays.stream(input.split(DELIMITER))
+                .map(String::trim)
                 .collect(Collectors.toList());
 
         return names;
     }
+
 
 }
