@@ -6,36 +6,51 @@ import racingcar.domain.MovingStrategy;
 import racingcar.domain.RacingGame;
 import racingcar.domain.RacingResult;
 import racingcar.domain.RandomMovingStrategy;
-import racingcar.view.InputView;
-import racingcar.view.OutputView;
+import racingcar.view.InputReader;
+import racingcar.view.OutputWriter;
 
 public class RacingController {
 
-    public static void run() {
+    private final InputReader inputReader;
+    private final OutputWriter outputWriter;
+
+    public RacingController(InputReader inputReader, OutputWriter outputWriter) {
+        this.inputReader = inputReader;
+        this.outputWriter = outputWriter;
+    }
+
+
+    public void run() {
         try {
-            List<String> carNames = InputView.readCarNames();
-            int rounds = InputView.readRounds();
-
-            Cars cars = Cars.from(carNames);
-            MovingStrategy strategy = new RandomMovingStrategy();
-            RacingGame game = new RacingGame(cars);
-
-            OutputView.printHeader();
-            RacingResult result = game.run(strategy, rounds);
-
-            printGameProgress(carNames, result.getRounds());
-            OutputView.printWinners(result.getWinners());
-
+            executeGame();
         } catch (IllegalArgumentException e) {
-            OutputView.printError(e.getMessage());
-            throw e;
+            outputWriter.printError(e.getMessage());
         }
     }
 
-    private static void printGameProgress(List<String> names,
-                                          List<List<Integer>> rounds) {
+    private void executeGame() {
+        // 1. 입력
+        List<String> carNames = inputReader.readCarNames();
+        int rounds = inputReader.readRounds();
+
+        // 2. 게임 준비
+        Cars cars = Cars.from(carNames);
+        MovingStrategy strategy = new RandomMovingStrategy();
+        RacingGame game = new RacingGame(cars);
+
+        // 3. 게임 실행
+        outputWriter.printHeader();
+        RacingResult result = game.run(strategy, rounds);
+
+        // 4. 결과 출력
+        printGameProgress(carNames, result.getRounds());
+        outputWriter.printWinners(result.getWinners());
+    }
+
+    private void printGameProgress(List<String> names,
+                                   List<List<Integer>> rounds) {
         for (List<Integer> positions : rounds) {
-            OutputView.printRound(names, positions);
+            outputWriter.printRound(names, positions);
         }
     }
 }
