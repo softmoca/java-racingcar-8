@@ -3,7 +3,7 @@ package racingcar.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
-import racingcar.view.PositionFormatter;
+import racingcar.view.output.PositionFormatter;
 
 class PositionFormatterTest {
 

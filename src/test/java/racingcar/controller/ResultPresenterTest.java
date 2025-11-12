@@ -1,4 +1,4 @@
-package racingcar;
+package racingcar.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import racingcar.controller.ResultPresenter;
 import racingcar.domain.strategy.RacingResult;
 import racingcar.view.output.OutputWriter;
 
