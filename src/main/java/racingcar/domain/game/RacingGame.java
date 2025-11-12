@@ -13,9 +13,9 @@ public class RacingGame {
         this.cars = cars;
     }
 
-    public RacingResult run(MovingStrategy strategy, int rounds) {
+    public RacingResult run(MovingStrategy strategy, Rounds rounds) {
         List<List<Integer>> roundHistory = new ArrayList<>();
-        for (int i = 0; i < rounds; i++) {
+        for (int i = 0; i < rounds.getValue(); i++) {
             cars.moveAll(strategy);
 
             List<Integer> currentPositions = cars.getPositions();

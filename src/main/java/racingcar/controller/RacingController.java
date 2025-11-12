@@ -3,6 +3,7 @@ package racingcar.controller;
 import java.util.List;
 import racingcar.domain.game.RacingGame;
 import racingcar.domain.game.RacingResult;
+import racingcar.domain.game.Rounds;
 import racingcar.domain.strategy.MovingStrategy;
 import racingcar.view.input.InputReader;
 import racingcar.view.output.OutputWriter;
@@ -35,7 +36,7 @@ public class RacingController {
     private void executeGame() {
         // 1. 입력
         List<String> carNames = inputReader.readCarNames();
-        int rounds = inputReader.readRounds();
+        Rounds rounds = inputReader.readRounds();
 
         // 2. 게임 준비
         RacingGame game = gameInitializer.createGame(carNames);

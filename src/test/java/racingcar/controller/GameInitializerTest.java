@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import racingcar.domain.game.RacingGame;
 import racingcar.domain.game.RacingResult;
+import racingcar.domain.game.Rounds;
 import racingcar.domain.strategy.MovingStrategy;
 
 class GameInitializerTest {
@@ -36,7 +37,7 @@ class GameInitializerTest {
         RacingGame game = initializer.createGame(carNames);
 
         // when
-        RacingResult result = game.run(alwaysMove, 3);
+        RacingResult result = game.run(alwaysMove, Rounds.from(3));
 
         // then
         assertThat(result.getWinners()).containsExactly("pobi", "woni");

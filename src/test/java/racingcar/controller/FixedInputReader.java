@@ -1,6 +1,7 @@
 package racingcar.controller;
 
 import java.util.List;
+import racingcar.domain.game.Rounds;
 import racingcar.view.input.InputReader;
 
 
@@ -20,7 +21,7 @@ public class FixedInputReader implements InputReader {
     }
 
     @Override
-    public int readRounds() {
-        return rounds;
+    public Rounds readRounds() {
+        return Rounds.from(rounds);
     }
 }

@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import racingcar.domain.car.Cars;
 import racingcar.domain.game.RacingGame;
 import racingcar.domain.game.RacingResult;
+import racingcar.domain.game.Rounds;
 import racingcar.domain.strategy.MovingStrategy;
 
 class RacingGameTest {
@@ -20,7 +21,7 @@ class RacingGameTest {
         MovingStrategy alwaysMove = () -> true;
 
         // when:
-        RacingResult result = game.run(alwaysMove, 3);
+        RacingResult result = game.run(alwaysMove, Rounds.from(3));
 
         // then:
         assertThat(result.getWinners())
@@ -35,7 +36,7 @@ class RacingGameTest {
         MovingStrategy alwaysMove = () -> true;
 
         // when
-        RacingResult result = game.run(alwaysMove, 3);
+        RacingResult result = game.run(alwaysMove, Rounds.from(3));
 
         // then
         List<List<Integer>> rounds = result.getRounds();

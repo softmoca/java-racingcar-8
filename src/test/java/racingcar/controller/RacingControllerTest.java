@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import racingcar.domain.game.Rounds;
 import racingcar.domain.strategy.MovingStrategy;
 import racingcar.view.input.InputReader;
 
@@ -48,8 +49,8 @@ class RacingControllerTest {
             }
 
             @Override
-            public int readRounds() {
-                return 0;
+            public Rounds readRounds() {
+                return Rounds.from(0);
             }
         };
 

@@ -2,6 +2,7 @@ package racingcar.view.input;
 
 import camp.nextstep.edu.missionutils.Console;
 import java.util.List;
+import racingcar.domain.game.Rounds;
 
 public class ConsoleInputReader implements InputReader {
 
@@ -18,25 +19,19 @@ public class ConsoleInputReader implements InputReader {
     }
 
     @Override
-    public int readRounds() {
+    public Rounds readRounds() {
         System.out.println(REQUEST_ROUNDS);
         String input = Console.readLine();
         return parseRounds(input);
     }
 
-    private int parseRounds(String input) {
+    private Rounds parseRounds(String input) {
         try {
-            int rounds = Integer.parseInt(input);
-            validateRounds(rounds);
-            return rounds;
+            int value = Integer.parseInt(input);
+            return Rounds.from(value);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자를 입력해주세요.");
         }
     }
 
-    private void validateRounds(int rounds) {
-        if (rounds <= 0) {
-            throw new IllegalArgumentException("시도 횟수는 1 이상이어야 합니다.");
-        }
-    }
 }
