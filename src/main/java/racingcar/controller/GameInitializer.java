@@ -1,9 +1,9 @@
-package racingcar;
+package racingcar.controller;
 
 import java.util.List;
-import racingcar.domain.Cars;
-import racingcar.domain.MovingStrategy;
-import racingcar.domain.RacingGame;
+import racingcar.domain.car.Cars;
+import racingcar.domain.strategy.MovingStrategy;
+import racingcar.domain.strategy.RacingGame;
 
 public class GameInitializer {
 
@@ -18,5 +18,7 @@ public class GameInitializer {
         return new RacingGame(cars);
     }
 
-
+    public MovingStrategy getMovingStrategy() {
+        return movingStrategy;
+    }
 }

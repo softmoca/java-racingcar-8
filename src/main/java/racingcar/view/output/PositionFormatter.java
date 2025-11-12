@@ -1,4 +1,4 @@
-package racingcar.view;
+package racingcar.view.output;
 
 public class PositionFormatter {
 

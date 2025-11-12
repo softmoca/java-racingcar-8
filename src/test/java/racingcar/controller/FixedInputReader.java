@@ -1,7 +1,7 @@
-package racingcar;
+package racingcar.controller.fixture;
 
 import java.util.List;
-import racingcar.view.InputReader;
+import racingcar.view.input.InputReader;
 
 
 public class FixedInputReader implements InputReader {

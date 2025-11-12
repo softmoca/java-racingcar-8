@@ -6,8 +6,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import racingcar.domain.RacingResult;
-import racingcar.view.OutputWriter;
+import racingcar.controller.ResultPresenter;
+import racingcar.domain.strategy.RacingResult;
+import racingcar.view.output.OutputWriter;
 
 class ResultPresenterTest {
 

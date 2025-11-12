@@ -1,7 +1,7 @@
-package racingcar;
+package racingcar.controller.fixture;
 
 import java.util.List;
-import racingcar.view.OutputWriter;
+import racingcar.view.output.OutputWriter;
 
 class MockOutputWriter implements OutputWriter {
     private boolean headerPrinted = false;
