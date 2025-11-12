@@ -4,20 +4,23 @@ import java.util.List;
 
 public class RacingResult {
 
-    private final List<String> winners;
+    private final WinnerNames winners;
     private final List<List<Integer>> rounds;
 
-    private RacingResult(List<String> winners, List<List<Integer>> rounds) {
+    private RacingResult(WinnerNames winners, List<List<Integer>> rounds) {
         this.winners = winners;
         this.rounds = rounds;
     }
 
-    public static RacingResult of(List<String> winners, List<List<Integer>> rounds) {
-        return new RacingResult(winners, rounds);
+    public static RacingResult of(List<String> winnerList, List<List<Integer>> rounds) {
+        return new RacingResult(
+                WinnerNames.of(winnerList),
+                rounds
+        );
     }
 
     public List<String> getWinners() {
-        return winners;
+        return winners.getNames();
     }
 
     public List<List<Integer>> getRounds() {
