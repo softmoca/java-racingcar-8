@@ -1,4 +1,4 @@
-package racingcar;
+package racingcar.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -6,8 +6,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import racingcar.controller.GameInitializer;
-import racingcar.controller.RacingController;
 import racingcar.domain.strategy.MovingStrategy;
 import racingcar.view.input.InputReader;
 
@@ -64,11 +62,15 @@ class RacingControllerTest {
                 gameInitializer
         );
 
+        // when
+        controller.run();
+
         // when & then
         assertThatThrownBy(() -> controller.run())
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("잘못된 입력");
 
+        // 예외 발생 전에 에러 메시지가 출력되었는지 확인
         assertThat(outputWriter.getErrorMessage()).isEqualTo("잘못된 입력");
     }
 
