@@ -1,0 +1,29 @@
+package racingcar;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.Arrays;
+import java.util.List;
+import org.junit.jupiter.api.Test;
+import racingcar.domain.MovingStrategy;
+import racingcar.domain.RacingGame;
+
+class GameInitializerTest {
+
+    @Test
+    void 자동차_이름들로_게임을_초기화한다() {
+        // given
+        List<String> carNames = Arrays.asList("pobi", "woni", "jun");
+        MovingStrategy strategy = () -> true;
+
+        GameInitializer initializer = new GameInitializer(strategy);
+
+        // when
+        RacingGame game = initializer.createGame(carNames);
+
+        // then
+        assertThat(game).isNotNull();
+    }
+
+
+}
