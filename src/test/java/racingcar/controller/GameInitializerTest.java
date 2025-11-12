@@ -5,9 +5,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import racingcar.domain.game.RacingGame;
+import racingcar.domain.game.RacingResult;
 import racingcar.domain.strategy.MovingStrategy;
-import racingcar.domain.strategy.RacingGame;
-import racingcar.domain.strategy.RacingResult;
 
 class GameInitializerTest {
 

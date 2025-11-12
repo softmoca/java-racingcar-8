@@ -2,8 +2,8 @@ package racingcar.controller;
 
 import java.util.List;
 import racingcar.domain.car.Cars;
+import racingcar.domain.game.RacingGame;
 import racingcar.domain.strategy.MovingStrategy;
-import racingcar.domain.strategy.RacingGame;
 
 public class GameInitializer {
 

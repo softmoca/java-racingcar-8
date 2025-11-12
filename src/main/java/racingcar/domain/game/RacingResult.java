@@ -1,4 +1,4 @@
-package racingcar.domain.strategy;
+package racingcar.domain.game;
 
 import java.util.List;
 

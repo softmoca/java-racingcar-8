@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import racingcar.domain.strategy.RacingResult;
+import racingcar.domain.game.RacingResult;
 import racingcar.view.output.OutputWriter;
 
 class ResultPresenterTest {

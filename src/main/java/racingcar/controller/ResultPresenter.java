@@ -1,7 +1,7 @@
 package racingcar.controller;
 
 import java.util.List;
-import racingcar.domain.strategy.RacingResult;
+import racingcar.domain.game.RacingResult;
 import racingcar.view.output.OutputWriter;
 
 public class ResultPresenter {
