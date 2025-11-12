@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import racingcar.domain.MovingStrategy;
 import racingcar.domain.RacingGame;
+import racingcar.domain.RacingResult;
 
 class GameInitializerTest {
 
@@ -25,5 +26,19 @@ class GameInitializerTest {
         assertThat(game).isNotNull();
     }
 
+    @Test
+    void 생성된_게임을_실행할_수_있다() {
+        // given
+        List<String> carNames = Arrays.asList("pobi", "woni");
+        MovingStrategy alwaysMove = () -> true;
 
+        GameInitializer initializer = new GameInitializer(alwaysMove);
+        RacingGame game = initializer.createGame(carNames);
+
+        // when
+        RacingResult result = game.run(alwaysMove, 3);
+
+        // then
+        assertThat(result.getWinners()).containsExactly("pobi", "woni");
+    }
 }
