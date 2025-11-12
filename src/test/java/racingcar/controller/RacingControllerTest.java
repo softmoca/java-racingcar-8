@@ -62,9 +62,6 @@ class RacingControllerTest {
                 gameInitializer
         );
 
-        // when
-        controller.run();
-
         // when & then
         assertThatThrownBy(() -> controller.run())
                 .isInstanceOf(IllegalArgumentException.class)
