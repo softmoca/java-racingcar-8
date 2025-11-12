@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import racingcar.controller.RacingController;
+import racingcar.domain.MovingStrategy;
 import racingcar.view.InputReader;
 
 class RacingControllerTest {
@@ -19,9 +20,13 @@ class RacingControllerTest {
         );
         MockOutputWriter outputWriter = new MockOutputWriter();
 
+        MovingStrategy strategy = () -> true;
+        GameInitializer gameInitializer = new GameInitializer(strategy);
+
         RacingController controller = new RacingController(
                 inputReader,
-                outputWriter
+                outputWriter,
+                gameInitializer
         );
 
         // when
@@ -49,11 +54,14 @@ class RacingControllerTest {
         };
 
         MockOutputWriter outputWriter = new MockOutputWriter();
+        GameInitializer gameInitializer = new GameInitializer(() -> true);
+
         RacingController controller = new RacingController(
                 inputReader,
-                outputWriter
+                outputWriter,
+                gameInitializer
         );
-
+        
         // when
         controller.run();
 
