@@ -1,6 +1,8 @@
 package racingcar.domain.game;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RacingResult {
 
@@ -24,7 +26,10 @@ public class RacingResult {
     }
 
     public List<List<Integer>> getRounds() {
-        return rounds;
+        return rounds.stream()
+                .map(ArrayList::new)
+                .collect(Collectors.toList());
     }
+
 
 }
